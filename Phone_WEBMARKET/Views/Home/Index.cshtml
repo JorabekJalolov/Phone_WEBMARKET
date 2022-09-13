@@ -1,0 +1,46 @@
+﻿@model IEnumerable<Phone_WEBMARKET.Models.Category>
+
+<div id="clear" >
+    <div class="container ">
+        <div class="row text-center ">
+
+            @foreach (var item in Model)
+            {
+               
+                    <!-- Team item-->
+            <div class=" col-xl-3 col-sm-6 my-5">
+                <a class="text-black-50"  asp-controller="Product" asp-action="Index" asp-route-id="@item.ID">
+                    <div class= "rounded shadow-sm py-5 px-4 " style="background-color:#eee">
+                      
+                        <img class="img-fluid  mb-3 img-thumbnail shadow-sm" style="height:100px;width:100px;background-size:cover"  src="data:image/jpeg;base64,@(Convert.ToBase64String(item.Picture))" alt="Card image cap" >
+                        <h5 class="mb-0">@item.Name</h5>@*<span class="small text-uppercase text-muted">CEO - Founder</span>*@
+                    </div>
+                    </a>
+            </div>
+                    <!-- End-->
+                    }
+                    @if (User.IsInRole("admin"))
+                    {
+                        <div class="col-xl-3 col-sm-6 my-5">
+                             <a class="text-black-50" asp-controller="Home" asp-action="Create">
+                                    <div class="shadow-sm py-5 px-4" style="background-color:#eee">
+                                        <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="" style="height:100px;width:100px;background-size:cover" class=" mb-3 img-fluid img-thumbnail shadow-sm ">
+                                        <h5 class="mb-0">New Section</h5>
+                                    </div>
+                               </a>
+                            </div>
+                       
+                    }
+                </div>
+            </div>
+</div>
+@section scripts{
+    <script type="text/javascript">
+
+
+        $(".custom-file-input").on("change", function () {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+    </script>
+}

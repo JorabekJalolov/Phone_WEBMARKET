@@ -1,0 +1,75 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+
+<!DOCTYPE html>          
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Inavation</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link href="~/lib/font-awesome/css/all.css" rel="stylesheet" />
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+</head>
+<body>
+    <header class="text-muted bg-dark" enctype="multipart/form-data">
+
+      
+
+        <nav class="navbar navbar-light bg-light justify-content-between bg-dark">
+            <div class="container">
+                <div>
+                    <img class="img-fluid my-2 float-left " src="https://mininnovation.uz/assets/public/images/state-site-logo.png" alt="">
+
+                </div>
+              
+            @*<form class="form-inline" asp-controller="Home" asp-action="Index" method="get" enctype="multipart/form-data">
+                <input class="form-control mr-sm-2" type="search" value="@ViewData["GetCategoryDetails"]" name="searchstring" placeholder="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+              
+            </form>*@
+                
+                    
+              
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    <form class="form-inline" method="post" asp-controller="Account" asp-action="Logout">
+                        <p class="my-2 my-sm-0 mx-2 px-4 text-white">@User.Identity.Name</p>
+                        <button class="btn btn-outline-info my-2 my-sm-0 mx- 1 px-1" type="submit">Logout<i class="fas fa-sign-out-alt px-1"></i></button>
+                    </form>
+                }
+                else
+                {
+                    <form class="form-inline" method="post" asp-controller="Account" asp-action="Login">
+
+                        <button class="btn btn-outline-info my-2 my-sm-0 mx-1 px-1" type="submit">Login <i class="fas fa-sign-in-alt px-1"></i></button>
+                    </form>
+
+                }
+
+            </div>
+        </nav>
+    </header>
+
+
+    <main role="main" class="pb-3 ">
+        <div class="container">
+            @RenderBody()
+        </div>
+    </main>
+
+
+
+    <footer class="border-top footer text-muted bg-dark">
+        <div class="container text-center text-white ">
+            &copy; 2021 - Inavation - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

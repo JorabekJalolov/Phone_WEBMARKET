@@ -1,0 +1,98 @@
+﻿@model IEnumerable<Phone_WEBMARKET.Models.Product>
+
+
+
+@{ ViewData["Title"] = "View"; }
+
+<div class="container">
+    <div class="row text-center">
+        <div class=" col-xl-4 col-sm-6 my-5"></div>
+        <div class=" col-xl-4 col-sm-6 my-5">
+
+            <div class="rounded shadow-sm py-5 px-4 " style="background-color:#eee">
+                <h3 class="mb-2">@ViewBag.Name</h3>
+                @if (ViewBag.Count != 0)
+                {
+    <h4 class="text-center">Soni-@ViewBag.Count</h4>}
+
+                @if (User.IsInRole("admin"))
+                {
+    <form class="text-center">
+
+        <button class="btn btn-outline-success my-2 my-sm-0" asp-controller="Product" asp-action="Create" type="submit">add product</button>
+    </form>}
+            </div>
+
+        </div>
+    </div>
+</div>
+<hr />
+<nav class="navbar navbar-light bg-light justify-content-between mt-5">
+    <h4 class="navbar-brand">
+        @ViewBag.Name
+    </h4>
+    @if (ViewBag.Count != 0)
+    {
+        <h4 class="text-center">Soni-@ViewBag.Count</h4>
+        }
+    <form class="form-inline">
+        @if (User.IsInRole("admin"))
+        {
+<button class="btn btn-outline-success my-2 my-sm-0" asp-controller="Product" asp-action="Create" type="submit">Create</button>}
+    </form>
+</nav>
+
+
+
+
+<table class="table table-bordered border-primary">
+    <thead>
+        <tr>
+            <th>
+                №
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Inventar)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Model)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Room)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Responsible)
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem=>item.ID)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Inventar)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Model)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Room)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Responsible)
+    </td>
+
+    <td>
+        <partial name="_TableEditPartial" model="item.ID" />
+
+        @Html.ActionLink("Batafsil", "Details", new { id = item.ID, }, new { @class = "btn btn-success" })
+
+    </td>
+</tr>}
+    </tbody>
+</table>
